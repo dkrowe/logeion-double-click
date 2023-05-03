@@ -8,7 +8,7 @@
             "js": ["scripts/main.js"],
             "matches": [
                 "https://www.sacred-texts.com/*",
-                "https://www.thelatinlibrary.com/*"
+                "https://www.thelatinlibrary.com/*",
                 "https://www.perseus.tufts.edu/*"
             ]
         }
