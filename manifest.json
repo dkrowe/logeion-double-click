@@ -9,7 +9,7 @@
             "matches": [
                 "https://www.sacred-texts.com/*",
                 "https://www.thelatinlibrary.com/*",
-                "https://www.perseus.tufts.edu/*"
+                "http://www.perseus.tufts.edu/*"
             ]
         }
     ]

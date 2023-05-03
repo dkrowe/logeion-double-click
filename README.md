@@ -7,5 +7,8 @@ Clone the repo and go to chrome://extensions - active Developer Mode and click t
 # Adding whitelisted sites
 Open `manifest.json` and add the website to the `matches` list. Be sure to include `/*` at the end if you want to match everything on the site.
 
+# Perseus
+The plugin strips the word links from Perseus, which I personally never found helpful. Unfortunately their website's code is a mess, so you need to access it from http://www.perseus.tufts.edu, not https://www.perseus.tufts.edu which has broken JavaScript preventing the plugin from loading. It will take 15-20 seconds for the links to be stripped because their site tries to load a cross-site script that has to time out before the plugin runs.
+
 # Future development
 Instead of using a whitelist we could check the selected text to see if it includes polytonic Greek characters. Detecting Latin would probably require checking the selection against a dictionary of all known Latin words.
