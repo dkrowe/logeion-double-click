@@ -1,0 +1,16 @@
+{
+    "manifest_version" : 3,
+    "name": "Logeion Doubleclick",
+    "version": "1.0",
+    "description": "Opens a new Logeion tab when a word is double clicked",
+    "content_scripts": [
+        {
+            "js": ["scripts/main.js"],
+            "matches": [
+                "https://www.sacred-texts.com/*",
+                "https://www.thelatinlibrary.com/*"
+                "https://www.perseus.tufts.edu/*"
+            ]
+        }
+    ]
+}
