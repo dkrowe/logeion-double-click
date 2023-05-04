@@ -2,7 +2,7 @@
 This is a Chrome plugin that detects when you double-click a word to highlight it, opens a new tab, and searches for the word in Logeion. It is active on all pages but uses the `chrome.i18n.detectLanguage` and `chrome.tabs.detectLanguage` APIs to try to make an educated guess about whether your selection is in Latin or Greek, which avoids unintentional searches in most cases.
 
 # Installing
-Clone the repo and go to chrome://extensions - active Developer Mode and click the "Load unpacked" button. Enter the repo's directory.
+Clone the repo and go to chrome://extensions - activate Developer Mode and click the "Load unpacked" button. Enter the repo's directory.
 
 # Perseus
 Use [the Perseus Scaife Viewer](https://scaife.perseus.org/library/) for the best experience. The plugin works for the classic site but I don't recommend it. The classic site has links on each individual word (which I personally never found helpful) so the plugin strips them. Unfortunately their website's code is a mess, so you need to access it from http://www.perseus.tufts.edu, not https://www.perseus.tufts.edu which has some broken JavaScript delaying the plugin from loading. It will take 15-20 seconds for the links to be stripped because their site tries to load a cross-site script that has to time out before the plugin runs.
