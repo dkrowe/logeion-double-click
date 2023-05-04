@@ -6,6 +6,16 @@ function isGreekOrLatin(lang) {
     return lang == "el" || lang == "la";
 }
 
+// Logeion doesn't like squashed dipthongs or non-letters
+function sanitizeWord(word) {
+    let clean = word.replace(/[|&;$%@"<>()+,]/g, "");
+    clean = clean.replace(/Æ/g, "AE");
+    clean = clean.replace(/æ/g, "ae");
+    clean = clean.replace(/Œ/g, "OE");
+    clean = clean.replace(/œ/g, "oe");
+    return clean;
+}
+
 let pageIsClassicsLanguage = false;
 chrome.runtime.sendMessage(
     { type: "detectLanguage", request: ""},
@@ -24,7 +34,7 @@ document.onmouseup = (event) => {
     const selection = document.getSelection().toString();
     // Only look up single words
     if (selection && selection.split(" ").length == 1) {
-        const clean = selection.replace(/[|&;$%@"<>()+,]/g, "");
+        const clean = sanitizeWord(selection);
         if (pageIsClassicsLanguage) {
             openLogeion(clean);
         } else {
