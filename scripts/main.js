@@ -2,8 +2,24 @@ function openLogeion(word) {
     window.open(`https://logeion.uchicago.edu/${word}`, "_blank");
 }
 
-function isGreekOrLatin(lang) {
-    return lang == "el" || lang == "la";
+function isGreekOrRomance(lang) {
+    let retval = false;
+    switch (lang) {
+    case "el":
+    case "la":
+    case "ro":
+    case "co":
+    case "es":
+    case "it":
+    case "fr":
+    case "pt":
+    case "gl":
+    case "ca":
+    case "oc":
+    case "sc":
+        retval = true;
+    }
+    return retval;
 }
 
 // Logeion doesn't like squashed diphthongs or non-letters
@@ -41,7 +57,7 @@ document.onmouseup = (event) => {
             chrome.i18n.detectLanguage(clean, langs => {
                 langs.languages.forEach(lang => {
                     console.log(`Word: ${clean} guessed as ${lang.language} pct ${lang.percentage}`)
-                    if (isGreekOrLatin(lang.language) && lang.percentage > 10) {
+                    if (isGreekOrRomance(lang.language) && lang.percentage > 10) {
                         openLogeion(clean);
                     }
                 })
