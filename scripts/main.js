@@ -6,7 +6,7 @@ function isGreekOrLatin(lang) {
     return lang == "el" || lang == "la";
 }
 
-// Logeion doesn't like squashed dipthongs or non-letters
+// Logeion doesn't like squashed diphthongs or non-letters
 function sanitizeWord(word) {
     let clean = word.replace(/[|&;$%@"<>()+,]/g, "");
     clean = clean.replace(/Æ/g, "AE");
