@@ -46,23 +46,25 @@ if (window.location.href.includes("perseus.tufts.edu/hopper/text")) {
     links.forEach(link => link.replaceWith(...link.childNodes));
 }
 
-document.onmouseup = (event) => {
-    const selection = document.getSelection().toString();
-    // Only look up single words
-    if (selection && selection.split(" ").length == 1) {
-        const clean = sanitizeWord(selection);
-        if (pageIsClassicsLanguage) {
-            openLogeion(clean);
-        } else {
-            chrome.i18n.detectLanguage(clean, langs => {
-                langs.languages.forEach(lang => {
-                    console.log(`Word: ${clean} guessed as ${lang.language} pct ${lang.percentage}`)
-                    if (isGreekOrRomance(lang.language) && lang.percentage > 10) {
-                        openLogeion(clean);
-                        return;
-                    }
-                })
-            });
+if (!window.location.href.includes("logeion.uchicago.edu")) {
+    document.onmouseup = (event) => {
+        const selection = document.getSelection().toString();
+        // Only look up single words
+        if (selection && selection.split(" ").length == 1) {
+            const clean = sanitizeWord(selection);
+            if (pageIsClassicsLanguage) {
+                openLogeion(clean);
+            } else {
+                chrome.i18n.detectLanguage(clean, langs => {
+                    langs.languages.forEach(lang => {
+                        console.log(`Word: ${clean} guessed as ${lang.language} pct ${lang.percentage}`)
+                        if (isGreekOrRomance(lang.language) && lang.percentage > 10) {
+                            openLogeion(clean);
+                            return;
+                        }
+                    })
+                });
+            }
         }
     }
 }
