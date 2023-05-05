@@ -59,6 +59,7 @@ document.onmouseup = (event) => {
                     console.log(`Word: ${clean} guessed as ${lang.language} pct ${lang.percentage}`)
                     if (isGreekOrRomance(lang.language) && lang.percentage > 10) {
                         openLogeion(clean);
+                        return;
                     }
                 })
             });
