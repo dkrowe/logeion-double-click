@@ -29,6 +29,7 @@ function sanitizeWord(word) {
     clean = clean.replace(/æ/g, "ae");
     clean = clean.replace(/Œ/g, "OE");
     clean = clean.replace(/œ/g, "oe");
+
     return clean;
 }
 
@@ -50,8 +51,9 @@ if (!window.location.href.includes("logeion.uchicago.edu")) {
     document.onmouseup = (event) => {
         const selection = document.getSelection().toString();
         // Only look up single words
-        if (selection && selection.split(" ").length == 1) {
-            const clean = sanitizeWord(selection);
+        const trimmed = selection.trim();
+        if (trimmed && trimmed.split(" ").length == 1) {
+            const clean = sanitizeWord(trimmed);
             if (pageIsClassicsLanguage) {
                 openLogeion(clean);
             } else {
