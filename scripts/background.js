@@ -9,7 +9,7 @@ async function detectLanguage(id) {
 }
 
 async function queryWordNetAPI(word) {
-    const response = await fetch(`https://latinwordnet.exeter.ac.uk/lemmatize/${word}/`, {
+    const response = await fetch(`https://latinwordnet.exeter.ac.uk/lemmatize/${word.toLowerCase()}/`, {
         method: "GET",
         cache: "default",
         cors: "no-cors",
