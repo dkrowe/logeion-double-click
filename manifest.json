@@ -9,7 +9,7 @@
         "scripting"
     ],
     "background": {
-        "service_worker": "scripts/detectLanguage.js"
+        "service_worker": "scripts/background.js"
     },
     "content_scripts": [
         {

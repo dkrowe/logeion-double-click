@@ -2,24 +2,8 @@ function openLogeion(word) {
     window.open(`https://logeion.uchicago.edu/${word}`, "_blank");
 }
 
-function isGreekOrRomance(lang) {
-    let retval = false;
-    switch (lang) {
-    case "el":
-    case "la":
-    case "ro":
-    case "co":
-    case "es":
-    case "it":
-    case "fr":
-    case "pt":
-    case "gl":
-    case "ca":
-    case "oc":
-    case "sc":
-        retval = true;
-    }
-    return retval;
+function isGreekOrLatin(lang) {
+    return lang == "el" || lang == "la";
 }
 
 // Logeion doesn't like squashed diphthongs or non-letters
@@ -58,13 +42,27 @@ if (!window.location.href.includes("logeion.uchicago.edu")) {
                 openLogeion(clean);
             } else {
                 chrome.i18n.detectLanguage(clean, langs => {
+                    let openedPage = false;
                     langs.languages.forEach(lang => {
                         console.log(`Word: ${clean} guessed as ${lang.language} pct ${lang.percentage}`)
-                        if (isGreekOrRomance(lang.language) && lang.percentage > 10) {
+                        if (isGreekOrLatin(lang.language)) {
                             openLogeion(clean);
+                            openedPage = true;
                             return;
                         }
-                    })
+                    });
+                    if (openedPage) {
+                        return;
+                    }
+                    // Finally, if we've failed all other checks, hit the Latin WordNet API to see if it might be Latin
+                    chrome.runtime.sendMessage(
+                        { type : "queryWordNetAPI", request: clean},
+                        function(reply) {
+                            if (reply) {
+                                openLogeion(clean);
+                            }
+                        }
+                    );
                 });
             }
         }
